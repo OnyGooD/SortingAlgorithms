@@ -20,6 +20,8 @@ match lehetoseg:
         hatar2 = int(input("Add meg melyik számmal végződjön: "))
         db1 = int(input("Add meg hány szám legyen: "))
 
+        random_generator(db1)
+
     case 2:
         def generate_string(length):
             return ''.join(random.choice(abc) for _ in range(length))
@@ -33,6 +35,8 @@ match lehetoseg:
         for s in random_strings:
             f.write(f"{s};")
             print(f"{s};")
+
+        generate_random_strings()
 
 #asp
 print()
