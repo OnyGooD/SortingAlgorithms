@@ -1,11 +1,9 @@
 import random
-f = open("ki.txt","w",encoding="utf-8")
+f = open("ki.txt","a",encoding="utf-8")
 lines = f.writelines
 abc = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 lehetoseg = int(input("Kérlek válassz az alábbi lehetőségekből: \n 1-számgenerátor \n 2-szöveg generátor \n 3-számgenerátor ellenőrzése \n 4-szöveg generátor ellenőrzése \n választásod: "))
-
-
 match lehetoseg:
 
     case 1:
@@ -43,16 +41,20 @@ match lehetoseg:
         lehetoseg3_hatar2 = int(input("Add meg melyik számmal végződött: "))
         lehetoseg3_darab = int(input("Add meg hany legyen: "))
 
-        for a in ['ki.txt']:
-            if int(a) >= int(lehetoseg3_hatar1):
-                print(f"{a} nagyobb mint {lehetoseg3_hatar1}")
-            elif int(a) <= lehetoseg3_hatar1:
-                print("nem jo valami")
-            if int(a) <= lehetoseg3_hatar2:
-                print(f"nagoyn jo minden, nagyobb nala")
-            elif int(a) >= lehetoseg3_hatar2:
-                print("valszeg nem jo valami")
-            if len(int(a))-lehetoseg3_darab == lehetoseg3_darab:
-                print("everything is alr")
-            elif len(int(a))-lehetoseg3_darab != lehetoseg3_darab:
-                print("nem is anyni karakter van")
+        with open("ki.txt", "r", encoding="utf-8") as f:
+            numbers = [int(x) for x in f.read().strip().split(";")]
+            for num in numbers:
+                if not (lehetoseg3_hatar1 <= num <= lehetoseg3_hatar2):
+                    print(f"{num} is not within the range [{lehetoseg3_hatar1}, {lehetoseg3_hatar2}]")
+                if len(numbers) != lehetoseg3_darab:
+                    print(f"The number of generated numbers is not {lehetoseg3_darab}")
+
+    case 4:
+        lehetoseg4_db = int(input("Hány szöveg legyen?: "))
+        with open("ki.txt", "r", encoding="utf-8") as f:
+            strings = [x for x in f.read().strip().split(";")]
+            if len(strings) != lehetoseg4_db:
+                print(f"The number of generated strings is not {lehetoseg4_db}")
+            for s in strings:
+                if not (1 <= len(s) <= 20):
+                    print(f"The length of string '{s}' is not within the range [1, 20]")
