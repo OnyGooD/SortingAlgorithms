@@ -36,7 +36,6 @@ match lehetoseg:
             f.write(f"{s};")
             print(f"{s};")
 
-        generate_random_strings()
+        generate_random_strings(number_of_strings)
 
 #asp
-print()
