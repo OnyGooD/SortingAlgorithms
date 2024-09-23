@@ -3,7 +3,7 @@ f = open("ki.txt","a",encoding="utf-8")
 lines = f.writelines
 abc = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
-lehetoseg = int(input("Kérlek válassz az alábbi lehetőségekből: \n 1-számgenerátor \n 2-szöveg generátor \n 3-számgenerátor ellenőrzése \n 4-szöveg generátor ellenőrzése \n választásod: "))
+lehetoseg = int(input("   ___                       _                    ___ _           _  \n  / __|___ _ _  ___ _ _ __ _| |_ ___   ___ _ _   / __| |_  ___ __| |__\n | (_ / -_) ' \/ -_) '_/ _` |  _/ -_) / _ \ '_| | (__| ' \/ -_) _| / /\n  \___\___|_||_\___|_| \__,_|\__\___| \___/_|    \___|_||_\___\__|_\_\ \n ( 1 ) --> Random Number Generator \n ( 2 ) --> Random Text Generator \n ( 3 ) --> Random Number Check \n ( 4 ) --> Rnadom Text Check \n What do you want? $: "))
 match lehetoseg:
 
     case 1:
