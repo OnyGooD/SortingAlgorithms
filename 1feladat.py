@@ -38,4 +38,21 @@ match lehetoseg:
 
         generate_random_strings(number_of_strings)
 
-#asp
+    case 3:
+        lehetoseg3_hatar1 = int(input("Add meg melyik számtól kezdődött: "))
+        lehetoseg3_hatar2 = int(input("Add meg melyik számmal végződött: "))
+        lehetoseg3_darab = int(input("Add meg hany legyen: "))
+
+        for a in ['ki.txt']:
+            if int(a) >= int(lehetoseg3_hatar1):
+                print(f"{a} nagyobb mint {lehetoseg3_hatar1}")
+            elif int(a) <= lehetoseg3_hatar1:
+                print("nem jo valami")
+            if int(a) <= lehetoseg3_hatar2:
+                print(f"nagoyn jo minden, nagyobb nala")
+            elif int(a) >= lehetoseg3_hatar2:
+                print("valszeg nem jo valami")
+            if len(int(a))-lehetoseg3_darab == lehetoseg3_darab:
+                print("everything is alr")
+            elif len(int(a))-lehetoseg3_darab != lehetoseg3_darab:
+                print("nem is anyni karakter van")
