@@ -1,46 +1,41 @@
 import random
+import string
 f = open("ki.txt","a",encoding="utf-8")
 lines = f.writelines
-abc = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
-lehetoseg = int(input("   ___                       _                    ___ _           _  \n  / __|___ _ _  ___ _ _ __ _| |_ ___   ___ _ _   / __| |_  ___ __| |__\n | (_ / -_) ' \/ -_) '_/ _` |  _/ -_) / _ \ '_| | (__| ' \/ -_) _| / /\n  \___\___|_||_\___|_| \__,_|\__\___| \___/_|    \___|_||_\___\__|_\_\ \n ( 1 ) --> Random Number Generator \n ( 2 ) --> Random Text Generator \n ( 3 ) --> Random Number Check \n ( 4 ) --> Random Text Check \n What do you want? $: "))
+lehetoseg = int(input("   ______                           __          ___        ________              __  \n  / ____/__  ____  ___  _________ _/ /____     ( _ )      / ____/ /_  ___  _____/ /__\n / / __/ _ \/ __ \/ _ \/ ___/ __ `/ __/ _ \   / __ \/|   / /   / __ \/ _ \/ ___/ //_/\n/ /_/ /  __/ / / /  __/ /  / /_/ / /_/  __/  / /_/  <   / /___/ / / /  __/ /__/ ,<   \n\____/\___/_/ /_/\___/_/   \__,_/\__/\___/   \____/\/   \____/_/ /_/\___/\___/_/|_|  \n                                                                                     \n ( 1 ) --> Generate Random Number \n ( 2 ) --> Generate Random Text \n ( 3 ) --> Check Random Number \n ( 4 ) --> Check Random Text \n What do you want? $: "))
 match lehetoseg:
-
     case 1:
-        def random_generator(db1):
-            random_szamok = ([random.randint(hatar1, hatar2) for _ in range(db1)])
-            for szam in random_szamok:
-                f.write(f"{szam};")
-                print(f"{szam};")
+        hatar1_case1 = int(input("Add meg melyik számtól kezdődjön: "))
+        hatar2_case1 = int(input("Add meg melyik számmal végződjön: "))
+        db1_case1 = int(input("Add meg hány szám legyen: "))
 
+        random_szamok_case1 = [random.randint(hatar1_case1, hatar2_case1) for _ in range(db1_case1)]
 
-        hatar1 = int(input("Add meg melyik számtól kezdődjön: "))
-        hatar2 = int(input("Add meg melyik számmal végződjön: "))
-        db1 = int(input("Add meg hány szám legyen: "))
-
-        random_generator(db1)
+        with open("ki.txt", "a") as f:
+            for idx_case1, szam_case1 in enumerate(random_szamok_case1):
+                if idx_case1 < len(random_szamok_case1) - 1:
+                    f.write(f"{szam_case1};")
+                else:
+                    f.write(f"{szam_case1}\n")
 
     case 2:
-        def generate_string(length):
-            return ''.join(random.choice(abc) for _ in range(length))
+        abc_case2 = string.ascii_lowercase + string.ascii_uppercase
 
-        def generate_random_strings(number):
-            string_lengths = [random.randint(1, 20) for _ in range(number)]
-            random_strings = [generate_string(length) for length in string_lengths]
-            return random_strings
+        number_of_strings_case2 = int(input("Hány szöveg legyen?: "))
 
-        number_of_strings = int(input("Hány szöveg legyen?: "))
-        random_strings = generate_random_strings(number_of_strings)
+        random_strings_case2 = []
+        for _ in range(number_of_strings_case2):
+            string_length_case2 = random.randint(1, 20)
+            random_string_case2 = ''.join(random.choice(abc_case2) for _ in range(string_length_case2))
+            random_strings_case2.append(random_string_case2)
 
-        # Írás a fájlba utolsó pontosvessző nélkül
-        with open("ki.txt", "w") as f:
-            for i, s in enumerate(random_strings):
-                if i == len(random_strings) - 1:  # ha ez az utolsó string
-                    f.write(f"{s}")
-                    print(f"{s}")
+        with open("ki.txt", "a") as f:
+            for i_case2, s_case2 in enumerate(random_strings_case2):
+                if i_case2 == len(random_strings_case2) - 1:
+                    f.write(f"{s_case2}\n")
                 else:
-                    f.write(f"{s};")
-                    print(f"{s};")
+                    f.write(f"{s_case2};")
 
     case 3:
         fajl_nev = 'ki.txt'
@@ -50,14 +45,12 @@ match lehetoseg:
 
         
         with open(fajl_nev, 'r') as file:
-            sor = file.readline().strip()  # Egy sor beolvasása
-            szamok = list(map(int, sor.split(';')))  # Számok listává alakítása
+            sor = file.readline().strip()
+            szamok = list(map(int, sor.split(';')))
 
-            # Darabszám ellenőrzése
             if len(szamok) != darabszam:
-                print(f"A számok száma nem felel meg a kívántnak: {darabszam} helyett {len(szamok)}.")
+                print(f"A számok száma nem felel meg a kívántnak: {darabszam} helyett {len(szamok)} szám van.")
             else:
-                # Határok ellenőrzése
                 minden_megfelel = True
                 for szam in szamok:
                     if szam < min_ertek or szam > max_ertek:
@@ -67,86 +60,17 @@ match lehetoseg:
                 if minden_megfelel:
                     print(f"Minden szám {min_ertek} és {max_ertek} között van.")
 
-            # def ellenoriz(nev, minimum, maximum, darabszam):
-            #     with open(nev, 'r') as file:
-            #         sor = file.readline().strip()  # Egy sor beolvasása a fájlból
-            #         szamok = list(sor.split(';'))  # Számok beolvasása és konvertálása
-
-            #         print(f"A fájlban {len(szamok)} szám található.")
-
-            #         # Ellenőrizzük, hogy a fájlban lévő számok száma megegyezik-e a megadott darabszámmal
-            #         match len(szamok):
-            #             case 0:
-            #                 print("A fájl üres.")
-            #             case szam if szam != darabszam:
-            #                 print(f"A számok száma nem felel meg a kívántnak: {darabszam} helyett {szam}.")
-            #             case _:
-            #                 # Ellenőrizzük, hogy minden szám a megadott határok között van-e
-            #                 megfelel = all(minimum <= szam <= maximum for szam in szamok)
-            #                 if megfelel:
-            #                     print(f"Minden szám {minimum} és {maximum} között van.")
-            #                 else:
-            #                     print(f"Van olyan szám, ami nem felel meg a határoknak ({minimum}, {maximum}).")
-
-            # fajl_nev = 'ki.txt'
-            # min_ertek = int(input("Add meg a minimum határt: "))
-            # max_ertek = int(input("Add meg a maximum határt: "))
-            # darabszam = int(input("Add meg a számok számát, amit vársz: "))
-
-            # ellenoriz(fajl_nev, min_ertek, max_ertek, darabszam)
-
-        # lehetoseg3_hatar1 = int(input("Add meg melyik számtól kezdődött: "))
-        # lehetoseg3_hatar2 = int(input("Add meg melyik számmal végződött: "))
-        # lehetoseg3_darab = int(input("Add meg hany legyen: "))
-        # f = open("ki.txt","r",encoding="utf-8")
-        # lines = f.readlines
-        # numbers = []
-        # for t in lines:
-        #     t = t.strip()
-        #     parts = t.split(';')
-        #     numbers.append({
-        #         "num":int(parts),
-        #         })
-        # for i in range(1):
-        #     if (numbers['num']) >= lehetoseg3_hatar1 and (numbers['num']) <= lehetoseg3_hatar2:
-        #         print("minden okes")
-            
-
-            
-
-        # for num in lines:
-        #     numbers = [
-        #         f.read().strip().split(";")
-        #     ]
-
-        # with open("ki.txt", "r", encoding="utf-8") as f:
-        #     for num in numbers:
-        #         if not (lehetoseg3_hatar1 <= num <= lehetoseg3_hatar2):
-        #             print(f"{num} is not within the range [{lehetoseg3_hatar1}, {lehetoseg3_hatar2}]")
-        #         if len(numbers) != lehetoseg3_darab:
-        #             print(f"The number of generated numbers is not {lehetoseg3_darab}")
-
     case 4:
         number_of_strings = int(input("Hány szöveg legyen?: "))
+
         with open("ki.txt", "r", encoding="utf-8") as file:
-            strings = [s.strip() for s in file.read().split(";")]
-            
-            # Check if the number of strings matches the expected value
-            if len(strings) != (number_of_strings):
-                print(f"The number of generated strings is not {number_of_strings}")
+            strings = [s.strip() for s in file.read().split(";") if not s.strip().isdigit()]  # Csak a nem szám karakterláncokat vizsgálja
+
+            if len(strings) != number_of_strings:
+                print(f"A szövegek száma nem felel meg a kívántnak: {number_of_strings} helyett {len(strings)} szöveg van.")
             else:
-                # Check if each string has a length between 1 and 20
                 for s in strings:
                     if not (0 <= len(s) <= 20):
-                        print(f"The length of string '{s}' is not within the range [0, 20]")
+                        print(f"Szöveg: '{s}' nem érvényes -- Nem 0 és 20 karakter között van")
                     else:
-                        print(f"String '{s}' is valid")
-
-        # lehetoseg4_db = int(input("Hány szöveg legyen?: "))
-        # with open("ki.txt", "r", encoding="utf-8") as f:
-        #     strings = [str(x) for x in f.read().strip().split(";")]
-        #     if len(strings) != lehetoseg4_db:
-        #         print(f"The number of generated strings is not {lehetoseg4_db}")
-        #     for s in strings:
-        #         if not (1 <= len(s) <= 20):
-        #             print(f"The length of string '{s}' is not within the range [1, 20]")
+                        print(f"Szöveg: '{s}' érvényes")
