@@ -1,125 +1,96 @@
-# Fájl beolvasása
-data = []
-with open("ki.txt", "r", encoding="utf-8") as f:
-    for line in f:
-        # Sorok feldolgozása, az adatok pontosvesszővel (;) vannak elválasztva
-        data.extend(line.strip().split(';'))
+# 1. Beolvasás
+file_name = 'ki.txt'
 
-# Típus eldöntése
-if all(item.replace('.', '', 1).isdigit() for item in data):
-    data = list(map(float, data))  # Számok esetén lebegőpontosra konvertálás
-    data_type = 'numbers'
-elif all(item.isalpha() for item in data):
-    data_type = 'strings'  # Szövegek esetén
-else:
-    print("Hibás adat az állományban!")
-    exit()
+try:
+    with open(file_name, 'r', encoding='utf-8') as f:
+        data = f.read().split(';')  # A ';' karakter alapján választjuk szét az adatokat
+        data = [item.strip() for item in data]  # Eltávolítjuk a felesleges szóközöket
+except FileNotFoundError:
+    print(f"A {file_name} fájl nem található!")
+    data = None
 
-# Rendezési irány választása
-order = input("Rendezés növekvő (n) vagy csökkenő (c) sorrendben? (n/c): ")
+if data is not None:
+    # 2. Adattípus eldöntése
+    if all(item.isdigit() for item in data):
+        adat_tipus = 'szamok'
+    elif all(item.isalpha() for item in data):
+        adat_tipus = 'szovegek'
+    else:
+        print("Hiba: A fájl vegyesen tartalmaz számokat és szövegeket, vagy helytelen formátumú adatokat!")
+        adat_tipus = None
 
-if order == 'n':
-    reverse = False
-elif order == 'c':
-    reverse = True
-else:
-    print("Érvénytelen választás!")
-    exit()
+    if adat_tipus is not None:
+        # 3. Rendezési irány kiválasztása
+        irany = input("Kérem válassza ki a rendezés irányát (n - növekvő, c - csökkenő): ").lower()
+        novekvo = True if irany == 'n' else False
 
-# Rendezési algoritmus választása
-alg_choice = input("Válassz rendezési algoritmust (1: Cserés, 2: Buborék, 3: Beszúrásos, 4: Minimumkiválasztás, 5: Merge Sort): ")
+        # 4. Rendezés elvégzése
+        if adat_tipus == 'szamok':
+            data = [int(x) for x in data]  # Konvertáljuk számokká
 
-# Cserés rendezés
-if alg_choice == '1':
-    for i in range(len(data) - 1):
-        for j in range(i + 1, len(data)):
-            if (data[i] > data[j] and not reverse) or (data[i] < data[j] and reverse):
-                data[i], data[j] = data[j], data[i]
+            n = len(data)
+            for i in range(n-1):
+                for j in range(i+1, n):
+                    if novekvo:
+                        if data[i] > data[j]:
+                            data[i], data[j] = data[j], data[i]
+                    else:
+                        if data[i] < data[j]:
+                            data[i], data[j] = data[j], data[i]
+        else:
+            n = len(data)
+            for i in range(n-1):
+                for j in range(i+1, n):
+                    if novekvo:
+                        if len(data[i]) > len(data[j]) or (len(data[i]) == len(data[j]) and data[i] > data[j]):
+                            data[i], data[j] = data[j], data[i]
+                    else:
+                        if len(data[i]) < len(data[j]) or (len(data[i]) == len(data[j]) and data[i] < data[j]):
+                            data[i], data[j] = data[j], data[i]
 
-# Buborékrendezés
-elif alg_choice == '2':
-    for i in range(len(data) - 1):
-        for j in range(len(data) - i - 1):
-            if (data[j] > data[j + 1] and not reverse) or (data[j] < data[j + 1] and reverse):
-                data[j], data[j + 1] = data[j + 1], data[j]
+        print("Rendezett lista:", data)
 
-# Beszúrásos rendezés
-elif alg_choice == '3':
-    for i in range(1, len(data)):
-        key = data[i]
-        j = i - 1
-        while j >= 0 and ((data[j] > key and not reverse) or (data[j] < key and reverse)):
-            data[j + 1] = data[j]
-            j -= 1
-        data[j + 1] = key
+        # 5. Új elem beillesztése
+        uj_elem = input("Adjon meg egy új elemet (szám vagy szöveg): ")
 
-# Minimumkiválasztásos rendezés
-elif alg_choice == '4':
-    for i in range(len(data)):
-        min_idx = i
-        for j in range(i + 1, len(data)):
-            if (data[j] < data[min_idx] and not reverse) or (data[j] > data[min_idx] and reverse):
-                min_idx = j
-        data[i], data[min_idx] = data[min_idx], data[i]
+        if adat_tipus == 'szamok':
+            if uj_elem.isdigit():
+                uj_elem = int(uj_elem)
+                data.append(uj_elem)
+                
+                n = len(data)
+                for i in range(n-1):
+                    for j in range(i+1, n):
+                        if novekvo:
+                            if data[i] > data[j]:
+                                data[i], data[j] = data[j], data[i]
+                        else:
+                            if data[i] < data[j]:
+                                data[i], data[j] = data[j], data[i]
+            else:
+                print("Hiba: A megadott új elem nem szám!")
+        else:
+            if uj_elem.isalpha():
+                data.append(uj_elem)
 
-# Merge sort
-elif alg_choice == '5':
-    def merge_sort_internal(lst):
-        if len(lst) > 1:
-            mid = len(lst) // 2
-            left_half = lst[:mid]
-            right_half = lst[mid:]
+                n = len(data)
+                for i in range(n-1):
+                    for j in range(i+1, n):
+                        if novekvo:
+                            if len(data[i]) > len(data[j]) or (len(data[i]) == len(data[j]) and data[i] > data[j]):
+                                data[i], data[j] = data[j], data[i]
+                        else:
+                            if len(data[i]) < len(data[j]) or (len(data[i]) == len(data[j]) and data[i] < data[j]):
+                                data[i], data[j] = data[j], data[i]
+            else:
+                print("Hiba: A megadott új elem nem szöveg!")
 
-            merge_sort_internal(left_half)
-            merge_sort_internal(right_half)
+        print("Új rendezett lista:", data)
 
-            i = j = k = 0
-            while i < len(left_half) and j < len(right_half):
-                if (left_half[i] < right_half[j] and not reverse) or (left_half[i] > right_half[j] and reverse):
-                    lst[k] = left_half[i]
-                    i += 1
-                else:
-                    lst[k] = right_half[j]
-                    j += 1
-                k += 1
-
-            while i < len(left_half):
-                lst[k] = left_half[i]
-                i += 1
-                k += 1
-
-            while j < len(right_half):
-                lst[k] = right_half[j]
-                j += 1
-                k += 1
-
-    merge_sort_internal(data)
-else:
-    print("Érvénytelen algoritmusválasztás!")
-    exit()
-
-print("Rendezett lista:", data)
-
-# Új elem beillesztése
-new_item = input("Adj meg egy új elemet, amit be szeretnél illeszteni: ")
-
-if data_type == 'numbers':
-    try:
-        new_item = float(new_item)
-    except ValueError:
-        print("Érvénytelen szám!")
-        exit()
-elif data_type == 'strings':
-    if not new_item.isalpha():
-        print("Érvénytelen szöveg!")
-        exit()
-
-# Új elem beillesztése a megfelelő helyre
-for i in range(len(data)):
-    if (new_item < data[i] and not reverse) or (new_item > data[i] and reverse):
-        data.insert(i, new_item)
-        break
-else:
-    data.append(new_item)
-
-print("Lista az új elem beillesztése után:", data)
+        # 6. Visszaírás a fájlba
+        try:
+            with open(file_name, 'w', encoding='utf-8') as f:
+                f.write(';'.join(str(item) for item in data))  # A listát ';' karakterrel választjuk el
+            print(f"A rendezett lista sikeresen kiírva a {file_name} fájlba!")
+        except Exception as e:
+            print(f"Hiba történt a fájl írásakor: {e}")
