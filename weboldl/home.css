@@ -1,0 +1,135 @@
+*,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.nav{
+    width: 100%;
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    background-color: rgba(0,0,0, 0.6);
+    position: fixed;
+    top: 0;
+    padding: 25px 35px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+}
+
+ul{
+    list-style: none;
+}
+
+li{
+    display: inline-block;
+}
+
+li a{
+    margin-left: 50px;
+}
+
+.nav a{
+    color: #ffffff;
+    letter-spacing: 1px;
+    text-decoration: none;
+    font-family: nav;
+}
+
+body{
+    background-attachment: fixed;
+    background-size: cover;
+    background-image: url("bg.jpg");
+    background-position: center center;
+    font-family: face;
+    font-size: 2.5vh;
+    letter-spacing: 3px;
+    color: #ffffff;
+}
+
+
+.github{
+    position: absolute;
+    margin-top: 1%;    
+    width: 80%;
+    margin-left: 28%;
+    height: 200px;
+}
+
+.szoveg{
+    position: absolute;
+    margin-top: -5%;
+    width: 55%;
+    margin-bottom: 100px;
+    height: 100%;
+    float: center;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    padding-bottom: 450px;
+}
+
+#logo1{
+    width: 40%;
+    padding: 0;
+    position: absolute;
+    margin: auto;
+    margin-left: 30%;
+    margin-top: 8%;
+}
+
+@font-face {
+    font-family: face;
+    src: url(CalibriBold.ttf);
+}
+
+@font-face {
+    font-family: nav;
+    src: url(CalibriBold.ttf);
+}
+
+#logoo{
+    position: absolute;
+    width: 3%;
+    margin-top: -1.5%;
+}
+
+h1{
+    font-size: 50px;
+}
+
+.leiras{
+    
+    margin: 300px;
+    width: 80%;
+    margin-left: 10%;
+    padding:200px;
+    backdrop-filter: blur(8px);
+    height: 400px;
+    float: center;
+    text-align: center;
+    padding-bottom: 200px;
+}
+
+.onygood-bemutatkozas h1{
+    padding: 75px;
+}
+
+
+a {
+	outline: none;
+}
+.mukodes{
+    margin: 250px;
+    
+    width: 80%;
+    margin-left: 10%;
+    padding: 100px;
+    backdrop-filter: blur(8px);
+    height: 400px;
+    float: center;
+    text-align: center;
+    padding-bottom: 200px;
+}

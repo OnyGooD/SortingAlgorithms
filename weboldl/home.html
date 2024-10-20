@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritmus website</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="icon" type="image/x-icon" href="logo.png">
+</head>
+
+<body>
+
+    <div class="github">
+        <div class="szoveg">
+            <a href="https://github.com/OnyGooD/SortingAlgorithms">GITHUB</a>
+            
+        </div>
+
+    </div>
+    <section class="leiras" title="leiras" id="leiras">
+        <h1>Leirás</h1>
+        <p>A határokat és a darabszámot olvassa be a program! Beolvassa a ki.txt tartalmát, és leellenőrzi, hogy
+            megfelel-e a feltételeknek. (darabszámnak, határoknak) ez legyen python nyelven, match lehetoseg-en belül a
+            case 3-ban</p>
+    </section>
+
+    <section class="mukodes" title="mukodes " id="mukodes">
+        <h1>Működés</h1>
+        <h2>Felhasználói bemenetek</h2>
+<p> fajl_nev = 'ki.txt' <br>
+min_ertek = int(input("Add meg a minimum határt: ")) <br>
+max_ertek = int(input("Add meg a maximum határt: ")) <br>
+darabszam = int(input("Add meg a sorok számát, amit vársz: ")) <br>
+<br><br>
+<h2>Ellenőrzés meghívása</h2>
+<p> ellenoriz(fajl_nev, min_ertek, max_ertek, darabszam) <br>
+: def ellenoriz(nev, minimum, maximum, darabszam):<br>
+    try:<br>
+        with open(nev, 'r') as file:<br>
+            sor = file.readline().strip()  # Egy sor beolvasása a fájlból<br>
+            szamok = list(map(int, sor.split(';')))  # Számok beolvasása és konvertálása<br>
+            <br>
+            print(f"A fájlban {len(szamok)} szám található.")<br>
+            <br>
+            # Ellenőrizzük, hogy a fájlban lévő számok száma megegyezik-e a megadott darabszámmal<br>
+            match len(szamok):<br>
+                case 0:<br>
+                    print("A fájl üres.")<br>
+                case szam if szam != darabszam:<br>
+                    print(f"A számok száma nem felel meg a kívántnak: {darabszam} helyett {szam}.")<br>
+                case _:<br>
+                    # Ellenőrizzük, hogy minden szám a megadott határok között van-e<br>
+                    megfelel = all(minimum <= szam <= maximum for szam in szamok)<br>
+                    if megfelel:<br>
+                        print(f"Minden szám {minimum} és {maximum} között van.")<br>
+                    else:
+                        print(f"Van olyan szám, ami nem felel meg a határoknak ({minimum}, {maximum}).")<br>
+
+    except FileNotFoundError:<br>
+        print(f"A fájl {nev} nem található.")<br>
+    except ValueError:<br>
+        print("Hiba történt a fájl tartalmának feldolgozása közben. Győződj meg róla, hogy a számok helyesen vannak megadva.")<br>
+    </p>
+</p>
+<h2></h2>
+    </section>
+
+    <section class="hatekonysag" id="hatekonysag">
+<h2>Hatékonyság</h2>
+<p>
+    Infohiány, további 1 óra 
+</p>
+
+    </section>
+
+    <div id="nemabszolut"></div>
+
+    <div class="nav">
+        <div class="logo">
+            <a href="home.html">
+                <img src="pixlr-image-generator-15a1fd1e-fecd-49a5-b896-c3e570b9e7c0.webp" id="logoo" title="Home">
+            </a>
+        </div>
+        <ul>
+            <li><a href="#leiras">Leírás</a></li>
+            
+            <li><a href="#mukodes">Működés és kód</a></li>
+            
+            <li><a href="#hatekonysag">Hatékonyság</a></li>
+        </ul>
+    </div>
+</body>
+
+</html>
