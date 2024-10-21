@@ -1,4 +1,4 @@
-# 1. Beolvasás
+#Beolvasás
 file_name = 'ki.txt'
 
 def prGreen(szoveg): print("\033[92m {}\033[00m".format(szoveg))
@@ -14,7 +14,7 @@ except FileNotFoundError:
     data = None
 
 if data is not None:
-    # 2. Adattípus eldöntése
+    #Adattípus eldöntése
     if all(item.isdigit() for item in data):
         adat_tipus = 'szamok'
         prYellow("   _   __                __                 _____            __  _            \n   / | / /_  ______ ___  / /_  ___  _____   / ___/____  _____/ /_(_)___  ____ _\n  /  |/ / / / / __ `__ \/ __ \/ _ \/ ___/   \__ \/ __ \/ ___/ __/ / __ \/ __ `/\n / /|  / /_/ / / / / / / /_/ /  __/ /      ___/ / /_/ / /  / /_/ / / / / /_/ / \n/_/ |_/\__,_/_/ /_/ /_/_.___/\___/_/      /____/\____/_/   \__/_/_/ /_/\__, /  \n                                                                      /____/   \n")
@@ -26,11 +26,11 @@ if data is not None:
         adat_tipus = None
 
     if adat_tipus is not None:
-        # 3. Rendezési irány kiválasztása
+        #Rendezési irány kiválasztása
         irany = input("Please select the sorting order (a - ascending, d - descending): ").lower()
         novekvo = True if irany == 'a' else False
 
-        # 4. Rendezés elvégzése
+        #Rendezés elvégzése
         if adat_tipus == 'szamok':
             data = [int(x) for x in data]  # Konvertáljuk számokká
 
@@ -56,7 +56,7 @@ if data is not None:
 
         prGreen(f"Ordered list:  {data}")
 
-        # 5. Új elem beillesztése
+        #Új elem beillesztése
         uj_elem = input("Please enter a new item (number or text): ")
 
         if adat_tipus == 'szamok':
@@ -93,7 +93,7 @@ if data is not None:
 
         prGreen(f"New ordered list:  {data}")
 
-        # 6. Visszaírás a fájlba
+        #Visszaírás a fájlba
         try:
             with open(file_name, 'w', encoding='utf-8') as f:
                 f.write(';'.join(str(item) for item in data))  # A listát ';' karakterrel választjuk el
