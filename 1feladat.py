@@ -5,7 +5,6 @@ f = open("ki.txt","a",encoding="utf-8")
 lines = f.writelines
 
 def prGreen(szoveg): print("\033[92m {}\033[00m".format(szoveg))
-#def prYellow(szoveg): print("\033[93m {}\033[00m".format(szoveg))
 def prRed(szoveg): print("\033[91m {}\033[00m".format(szoveg))
 
 lehetoseg = int(input("   ______                           __          ___        ________              __  \n  / ____/__  ____  ___  _________ _/ /____     ( _ )      / ____/ /_  ___  _____/ /__\n / / __/ _ \/ __ \/ _ \/ ___/ __ `/ __/ _ \   / __ \/|   / /   / __ \/ _ \/ ___/ //_/\n/ /_/ /  __/ / / /  __/ /  / /_/ / /_/  __/  / /_/  <   / /___/ / / /  __/ /__/ ,<   \n\____/\___/_/ /_/\___/_/   \__,_/\__/\___/   \____/\/   \____/_/ /_/\___/\___/_/|_|  \n                                                                                     \n ( 1 ) --> Generate Random Number \n ( 2 ) --> Generate Random Text \n ( 3 ) --> Check Random Number \n ( 4 ) --> Check Random Text \n What do you want? $: "))

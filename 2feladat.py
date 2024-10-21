@@ -2,7 +2,7 @@
 file_name = 'ki.txt'
 
 def prGreen(szoveg): print("\033[92m {}\033[00m".format(szoveg))
-#def prYellow(szoveg): print("\033[93m {}\033[00m".format(szoveg))
+def prYellow(szoveg): print("\033[93m {}\033[00m".format(szoveg))
 def prRed(szoveg): print("\033[91m {}\033[00m".format(szoveg))
 
 try:
@@ -17,8 +17,10 @@ if data is not None:
     # 2. Adattípus eldöntése
     if all(item.isdigit() for item in data):
         adat_tipus = 'szamok'
+        prYellow("   _   __                __                 _____            __  _            \n   / | / /_  ______ ___  / /_  ___  _____   / ___/____  _____/ /_(_)___  ____ _\n  /  |/ / / / / __ `__ \/ __ \/ _ \/ ___/   \__ \/ __ \/ ___/ __/ / __ \/ __ `/\n / /|  / /_/ / / / / / / /_/ /  __/ /      ___/ / /_/ / /  / /_/ / / / / /_/ / \n/_/ |_/\__,_/_/ /_/ /_/_.___/\___/_/      /____/\____/_/   \__/_/_/ /_/\__, /  \n                                                                      /____/   \n")
     elif all(item.isalpha() for item in data):
         adat_tipus = 'szovegek'
+        prYellow(" ______          __     _____            __  _            \n /_  __/__  _  __/ /_   / ___/____  _____/ /_(_)___  ____ _\n  / / / _ \| |/_/ __/   \__ \/ __ \/ ___/ __/ / __ \/ __ `/\n / / /  __/>  </ /_    ___/ / /_/ / /  / /_/ / / / / /_/ / \n/_/  \___/_/|_|\__/   /____/\____/_/   \__/_/_/ /_/\__, /  \n                                                  /____/   \n")
     else:
         prRed("Error: The file contains a mix of numbers and text, or data in an incorrect format!")
         adat_tipus = None
@@ -26,7 +28,7 @@ if data is not None:
     if adat_tipus is not None:
         # 3. Rendezési irány kiválasztása
         irany = input("Please select the sorting order (a - ascending, d - descending): ").lower()
-        novekvo = True if irany == 'n' else False
+        novekvo = True if irany == 'a' else False
 
         # 4. Rendezés elvégzése
         if adat_tipus == 'szamok':
@@ -52,7 +54,7 @@ if data is not None:
                         if len(data[i]) < len(data[j]) or (len(data[i]) == len(data[j]) and data[i] < data[j]):
                             data[i], data[j] = data[j], data[i]
 
-        prGreen("Ordered list: ", data)
+        prGreen(f"Ordered list:  {data}")
 
         # 5. Új elem beillesztése
         uj_elem = input("Please enter a new item (number or text): ")
@@ -89,7 +91,7 @@ if data is not None:
             else:
                 prRed("Error: The specified new item is not text!")
 
-        prGreen("New ordered list: ", data)
+        prGreen(f"New ordered list:  {data}")
 
         # 6. Visszaírás a fájlba
         try:
